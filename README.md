@@ -1,21 +1,8 @@
-# FuriniMath v3.1
+# FuriniMath v3.3
+Build autônomo: CSS, JavaScript e mão virtual estão embutidos no próprio `index.html`.
+Não usa Service Worker nem arquivos JS/CSS externos, evitando o problema que fazia a mão desaparecer.
 
-Versão com mão virtual didática.
-
-## Melhorias desta versão
-- removidas as fotos reais do produto final;
-- arte final com mãos virtuais sobrepostas;
-- vista frontal, posterior e raio-x corrigidas;
-- dedo oculto das unidades exibido logicamente;
-- animação de formação do número;
-- trilha, treino e visualizador mantidos.
-
-## Atualizar no GitHub
-Coloque `furinimath-v3.1.zip` na raiz do repositório e execute:
-
+Atualização:
 ```bash
-unzip -o furinimath-v3.1.zip && bash atualizar.sh
+unzip -o furinimath-v3.3.zip && bash atualizar.sh
 ```
-
-
-Esta versão remove caches/service workers antigos para impedir que a v2 continue aparecendo.

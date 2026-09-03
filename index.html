@@ -1,148 +1,203 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#221a5c" />
-  <title>FuriniMath v3.2</title>
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#20195d">
+<title>FuriniMath v3.3</title>
+<style>
+:root{--bg:#f4f6ff;--ink:#17203f;--muted:#66708a;--line:#e2e6f3;--purple:#6d4aff;--navy:#182765;--u:#ff765b;--d:#2da4ff;--c:#8a68ff;--skin:#f0bea0;--skin2:#dfa27f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,sans-serif;background:linear-gradient(#f8f9ff,#eef3ff);color:var(--ink)}
+button,input,select{font:inherit}
+header{position:sticky;top:0;z-index:10;background:linear-gradient(90deg,#15245f,#253d8d);color:#fff;padding:14px 26px;display:flex;align-items:center;gap:16px}
+header b{font-size:22px}header small{display:block;opacity:.72}.logo{font-size:28px}.xp{margin-left:auto;background:#ffffff1c;padding:9px 14px;border-radius:999px}
+main{max-width:1280px;margin:auto;padding:30px 18px 80px}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:center;padding:18px 0 30px}.hero h1{font-size:clamp(42px,6vw,72px);line-height:.96;letter-spacing:-2.5px;margin:8px 0 16px}.hero h1 span{color:var(--purple)}.hero p{font-size:18px;line-height:1.58;color:var(--muted)}.eyebrow{font-size:12px;font-weight:900;letter-spacing:1.6px;color:var(--purple)}.heroCard{background:linear-gradient(145deg,#20195d,#704dff);color:#fff;border-radius:28px;padding:24px}.heroCard strong{display:block;font-size:56px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:0 18px 45px rgba(31,37,98,.08);margin:20px 0}.head{display:flex;justify-content:space-between;gap:20px;align-items:end}.head h2{font-size:34px;margin:5px 0}.numctl{display:flex;gap:8px;align-items:center}.numctl button,.tabs button,.primary,.ghost{border:0;border-radius:13px;padding:10px 14px;font-weight:850}.numctl button,.ghost,.tabs button{background:#efedff;color:var(--purple)}.numctl input{width:110px;border:1px solid var(--line);border-radius:13px;padding:9px;text-align:center;font-size:28px;font-weight:950}.primary,.tabs button.active{background:var(--purple)!important;color:#fff!important}
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:18px}.stage{border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,#fcfcff,#f3f0ff);padding:16px}.stagebar{display:flex;justify-content:space-between;gap:10px;align-items:center}.tabs{display:flex;gap:8px}.handbox{min-height:520px;display:grid;place-items:center}.handsvg{width:min(100%,760px);height:auto;filter:drop-shadow(0 15px 25px rgba(35,27,94,.1))}
+.note{background:#fff7d9;border:1px solid #ffe082;border-radius:15px;padding:12px 14px;color:#6b571d;font-size:13px;line-height:1.45}
+.info{border:1px solid var(--line);border-radius:24px;padding:18px}.result{background:linear-gradient(145deg,#20195d,#6849e8);color:white;border-radius:20px;padding:18px}.result small{display:block;opacity:.72;font-weight:800}.result strong{font-size:58px}
+.item{margin-top:12px;border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;justify-content:space-between;gap:10px}.item.c{border-left:6px solid var(--c)}.item.d{border-left:6px solid var(--d)}.item.u{border-left:6px solid var(--u)}.item span{color:var(--muted);text-align:right}.formula{margin-top:14px;background:#f5f6fb;border-radius:15px;padding:14px;font-family:ui-monospace,monospace;line-height:1.5}
+.train{display:grid;grid-template-columns:300px 1fr;gap:18px}.challenge{background:linear-gradient(145deg,#1c2e73,#6d4aff);color:white;border-radius:22px;padding:22px;text-align:center}.challenge strong{display:block;font-size:72px}.challenge button{border:0;border-radius:12px;padding:9px 12px;font-weight:800}.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.selectors label{background:#f7f8fd;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;justify-content:space-between;align-items:center}.selectors select{padding:7px;border-radius:9px;border:1px solid var(--line)}
+.path{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.lesson{border:1px solid var(--line);border-radius:18px;padding:15px;background:#fbfbff}.lesson b,.lesson small{display:block}.lesson small{color:var(--muted);line-height:1.4;margin-top:6px}
+footer{text-align:center;padding:26px;color:var(--muted)}
+@media(max-width:960px){.hero,.grid,.train{grid-template-columns:1fr}.path{grid-template-columns:repeat(2,1fr)}.head{display:block}.numctl{margin-top:12px}.handbox{min-height:410px}}
+@media(max-width:560px){.path,.selectors{grid-template-columns:1fr}.panel{padding:16px}.hero h1{font-size:44px}.handbox{min-height:330px}}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">✋</div>
-      <div>
-        <strong>FuriniMath</strong>
-        <small>Método Furini • mãos virtuais didáticas</small>
+<header>
+  <div class="logo">🧠✋</div>
+  <div><b>FuriniMath</b><small>Método Furini • Soroban Mental</small></div>
+  <div class="xp">⭐ <span id="xp">0</span> XP</div>
+</header>
+
+<main>
+<section class="hero">
+  <div><span class="eyebrow">VERSÃO 3.3 • BUILD AUTÔNOMO</span><h1>Mãos virtuais <span>visíveis e interativas.</span></h1><p>Esta versão não depende de arquivo JavaScript externo nem de Service Worker. A mão virtual já nasce dentro da própria página, evitando o problema que fazia o visualizador ficar vazio.</p></div>
+  <div class="heroCard"><strong>0–999</strong>base 0–4 + quinário, seguindo a lógica do soroban.</div>
+</section>
+
+<section class="panel">
+  <div class="head">
+    <div><span class="eyebrow">VISUALIZADOR FURINI</span><h2>Monte qualquer número</h2></div>
+    <div class="numctl"><button id="minus">−</button><input id="num" value="532" maxlength="3" inputmode="numeric"><button id="plus">+</button><button id="random">Aleatório</button></div>
+  </div>
+  <div class="grid">
+    <div class="stage">
+      <div class="stagebar">
+        <div class="tabs"><button class="active" data-view="front">Frente</button><button data-view="back">Verso</button><button data-view="xray">Raio-X</button></div>
+        <button id="animate" class="ghost">Animar formação</button>
       </div>
+      <div class="handbox" id="handbox">
+        <!-- FALLBACK ESTÁTICO: aparece mesmo se JS falhar -->
+        <svg class="handsvg" viewBox="0 0 860 620" aria-label="Mãos virtuais do Método Furini">
+          <rect x="10" y="10" width="840" height="600" rx="28" fill="#fbfaff"/>
+          <text x="34" y="48" font-size="16" font-weight="900" fill="#6d4aff">VISTA FRONTAL</text>
+          <text x="720" y="55" font-size="40" font-weight="1000" fill="#17203f">532</text>
+
+          <g>
+            <rect x="320" y="185" width="280" height="270" rx="95" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+            <rect x="340" y="55" width="52" height="235" rx="26" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+            <rect x="405" y="38" width="56" height="252" rx="28" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+            <rect x="474" y="50" width="54" height="240" rx="27" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+            <rect x="540" y="82" width="49" height="208" rx="24" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+            <path d="M320 348 C262 332 225 296 214 263 C207 240 215 216 235 208 C255 200 282 211 300 232 C314 249 320 267 325 287" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+          </g>
+
+          <g opacity=".98">
+            <path d="M290 480 C284 400 297 325 320 291 C336 268 358 263 378 277 C397 291 398 317 392 345 C379 401 350 449 330 488" fill="#dfa27f" stroke="#bd7f5d" stroke-width="3"/>
+            <path d="M472 488 C477 414 507 342 548 282 C561 263 582 252 600 260 C620 270 621 297 610 320 C578 386 545 435 518 484" fill="#dfa27f" stroke="#bd7f5d" stroke-width="3"/>
+            <rect x="344" y="100" width="34" height="352" rx="17" fill="#b09cff" stroke="#6d4aff" stroke-width="3"/>
+            <rect x="408" y="87" width="34" height="365" rx="17" fill="#dfa27f" stroke="#bd7f5d" stroke-width="3"/>
+            <rect x="472" y="104" width="34" height="348" rx="17" fill="#dfa27f" stroke="#bd7f5d" stroke-width="3"/>
+          </g>
+
+          <path d="M318 292 C268 278 224 285 199 307 C184 321 188 343 207 352 C234 366 277 351 324 331" fill="#6fc7ff" stroke="#158ddd" stroke-width="3"/>
+          <path d="M268 426 C245 404 243 385 258 370 C279 352 308 357 416 394" fill="none" stroke="#ff765b" stroke-width="15" stroke-linecap="round" opacity=".22" stroke-dasharray="12 8"/>
+
+          <circle cx="359" cy="84" r="12" fill="#8a68ff"/><text x="378" y="89" font-size="14" font-weight="900" fill="#8a68ff">+500</text>
+          <circle cx="432" cy="276" r="13" fill="#2da4ff" stroke="#fff" stroke-width="4"/><text x="432" y="280" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">3</text>
+          <circle cx="404" cy="392" r="13" fill="#ff765b" stroke="#fff" stroke-width="4"/><text x="404" y="396" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">2</text>
+
+          <text x="70" y="160" font-size="14" font-weight="900" fill="#8a68ff">CENTENA</text>
+          <text x="80" y="276" font-size="14" font-weight="900" fill="#2da4ff">DEZENA</text>
+          <text x="77" y="392" font-size="14" font-weight="900" fill="#ff765b">UNIDADE</text>
+          <rect x="55" y="530" width="750" height="48" rx="15" fill="#fff" stroke="#e2e6f3"/>
+          <text x="80" y="560" font-size="14" fill="#17203f">C = 500 + 0 • D = 0 + 30 • U = 0 + 2</text>
+        </svg>
+      </div>
+      <div class="note"><b>Raio-X:</b> o mindinho esquerdo fica atrás da mão direita. Na prática, sua posição é sentida; no software, o modo Raio-X mostra o percurso oculto sem reproduzir a rotação acidental da foto traseira.</div>
     </div>
-    <nav>
-      <button data-go="visualizador">Visualizador</button>
-      <button data-go="trilha">Trilha</button>
-      <button data-go="treino">Treino</button>
-    </nav>
-    <div class="pill">⭐ <span id="xp">0</span> XP</div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <span class="eyebrow">VERSÃO 3.2 • MÃO VIRTUAL</span>
-        <h1>Agora com <span>mãos virtuais</span> e visualização correta.</h1>
-        <p>As fotos serviram como referência. A arte final é virtual, mais bonita e mais didática. O verso não fica invertido como na foto; o modo <b>Raio‑X</b> mostra logicamente o dedo oculto atrás da mão direita.</p>
-      </div>
-      <div class="heroCard">
-        <div class="heroN">000–999</div>
-        <p>Mesma lógica operacional do soroban: base 0–4 + quinário da ordem.</p>
-      </div>
-    </section>
+    <aside class="info">
+      <div class="result"><small>NÚMERO</small><strong id="out">532</strong></div>
+      <div class="item c"><b>Centenas</b><span id="ct">500 + 0 = 500</span></div>
+      <div class="item d"><b>Dezenas</b><span id="dt">0 + 30 = 30</span></div>
+      <div class="item u"><b>Unidades</b><span id="ut">0 + 2 = 2</span></div>
+      <div class="formula" id="formula">532 = (500+0) + (0+30) + (0+2)</div>
+    </aside>
+  </div>
+</section>
 
-    <section id="visualizador" class="panel">
-      <div class="panelHead">
-        <div>
-          <span class="eyebrow">VISUALIZADOR FURINI</span>
-          <h2>Monte qualquer número</h2>
-        </div>
-        <div class="controlsTop">
-          <button id="minus">−</button>
-          <input id="num" value="532" inputmode="numeric" maxlength="3" />
-          <button id="plus">+</button>
-          <button id="rand" class="alt">Aleatório</button>
-        </div>
-      </div>
+<section class="panel">
+  <span class="eyebrow">TRILHA</span><h2>Aprenda gradualmente</h2>
+  <div class="path">
+    <div class="lesson">👋<b>Fundamentos</b><small>Falanges, ordens e valor posicional.</small></div>
+    <div class="lesson">🔢<b>Chisanbop</b><small>Representação até 99.</small></div>
+    <div class="lesson">💻<b>Binário</b><small>Dedos como bits.</small></div>
+    <div class="lesson">🧮<b>Soroban</b><small>Base 1–4 e quinário.</small></div>
+    <div class="lesson">✋<b>Método Furini</b><small>Mãos sobrepostas e 0–999.</small></div>
+  </div>
+</section>
 
-      <div class="visualGrid">
-        <div class="stageCard">
-          <div class="stageTop">
-            <div class="tabs">
-              <button class="tab active" data-view="frente">Frente</button>
-              <button class="tab" data-view="verso">Verso</button>
-              <button class="tab" data-view="raiox">Raio‑X</button>
-            </div>
-            <button id="animate" class="alt">Animar formação</button>
-          </div>
-          <div id="svgWrap" class="svgWrap"></div>
-          <div class="note">O mindinho da mão esquerda marca as unidades por trás da mão direita. Por isso o modo <b>Raio‑X</b> torna visível aquilo que, no uso real, é percebido de forma cinestésica.</div>
-        </div>
+<section class="panel">
+  <span class="eyebrow">TREINO</span><h2>Monte o estado Furini</h2>
+  <div class="train">
+    <div class="challenge"><small>NÚMERO ALVO</small><strong id="target">482</strong><button id="newtarget">Novo número</button></div>
+    <div class="selectors">
+      <label>Base centena<select id="cb"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+      <label>+500 <input type="checkbox" id="c5"></label>
+      <label>Base dezena<select id="db"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+      <label>+50 <input type="checkbox" id="d5"></label>
+      <label>Base unidade<select id="ub"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+      <label>+5 <input type="checkbox" id="u5"></label>
+      <button id="check" class="primary">Conferir</button><div id="fb"></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer>FuriniMath v3.3 • mão virtual embutida na própria página</footer>
 
-        <aside class="infoCard">
-          <div class="bigResult"><span>Número</span><strong id="outN">532</strong></div>
-          <div class="legendItem c"><b>Centenas</b><span id="cDesc"></span></div>
-          <div class="legendItem d"><b>Dezenas</b><span id="dDesc"></span></div>
-          <div class="legendItem u"><b>Unidades</b><span id="uDesc"></span></div>
-          <div class="formula" id="formula"></div>
-          <div class="guideBox">
-            <b>Lógica</b>
-            <ul>
-              <li><span class="dot c"></span> Polegar esquerdo = 100–400 / Indicador esquerdo = +500</li>
-              <li><span class="dot d"></span> Polegar direito = 10–40 / Médio esquerdo = +50</li>
-              <li><span class="dot u"></span> Mindinho esquerdo atrás = 1–4 / Anelar esquerdo = +5</li>
-            </ul>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="panel" id="trilha">
-      <div class="panelHead">
-        <div>
-          <span class="eyebrow">TRILHA</span>
-          <h2>Aprenda gradualmente</h2>
-        </div>
-      </div>
-      <div id="path" class="path"></div>
-    </section>
-
-    <section class="panel" id="treino">
-      <div class="panelHead">
-        <div>
-          <span class="eyebrow">TREINO</span>
-          <h2>Monte o estado Furini</h2>
-        </div>
-      </div>
-      <div class="trainGrid">
-        <div class="challengeBox">
-          <small>NÚMERO ALVO</small>
-          <strong id="target">482</strong>
-          <button id="newTarget">Novo número</button>
-        </div>
-        <div class="selectors">
-          <label>Base centena
-            <select id="cb"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-          </label>
-          <label>+500 <input type="checkbox" id="c5"></label>
-          <label>Base dezena
-            <select id="db"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-          </label>
-          <label>+50 <input type="checkbox" id="d5"></label>
-          <label>Base unidade
-            <select id="ub"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
-          </label>
-          <label>+5 <input type="checkbox" id="u5"></label>
-          <button id="check" class="primary">Conferir</button>
-          <div id="feedback" class="feedback"></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>FuriniMath v3.2 • Método Furini • visual virtual didático</footer>
-  
 <script>
-(async function(){
-  try {
-    if ('serviceWorker' in navigator) {
-      const regs = await navigator.serviceWorker.getRegistrations();
-      for (const r of regs) await r.unregister();
-    }
-    if ('caches' in window) {
-      const keys = await caches.keys();
-      for (const k of keys) await caches.delete(k);
-    }
-  } catch(e) {}
+(function(){
+  let view='front', target=482, anim=false;
+  const $=id=>document.getElementById(id);
+  const enc=n=>{n=Math.max(0,Math.min(999,parseInt(n)||0));const u=n%10,d=Math.floor(n/10)%10,c=Math.floor(n/100)%10;return{n,u,d,c,ub:u%5,u5:u>=5,db:d%5,d5:d>=5,cb:c%5,c5:c>=5}};
+  const label=v=>v==='front'?'VISTA FRONTAL':v==='back'?'VISTA POSTERIOR':'VISTA RAIO-X';
+
+  function hand(s,step=3){
+    const xr=view==='xray', back=view==='back';
+    const SC=step>=1, SD=step>=2, SU=step>=3;
+    const ux=376+(s.ub?((s.ub-1)*28):0), dx=376+(s.db?((s.db-1)*28):0), cx=376+(s.cb?((s.cb-1)*28):0);
+    return `<svg class="handsvg" viewBox="0 0 860 620">
+      <rect x="10" y="10" width="840" height="600" rx="28" fill="#fbfaff"/>
+      <text x="34" y="48" font-size="16" font-weight="900" fill="#6d4aff">${label(view)}</text>
+      <text x="720" y="55" font-size="40" font-weight="1000" fill="#17203f">${String(s.n).padStart(3,'0')}</text>
+
+      <g opacity="${back?.42:1}">
+        <rect x="320" y="185" width="280" height="270" rx="95" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+        <rect x="340" y="55" width="52" height="235" rx="26" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+        <rect x="405" y="38" width="56" height="252" rx="28" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+        <rect x="474" y="50" width="54" height="240" rx="27" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+        <rect x="540" y="82" width="49" height="208" rx="24" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+        <path d="M320 348 C262 332 225 296 214 263 C207 240 215 216 235 208 C255 200 282 211 300 232 C314 249 320 267 325 287" fill="#f0bea0" stroke="#cc9472" stroke-width="3"/>
+      </g>
+
+      <g opacity="${xr?.82:1}">
+        <path d="M290 480 C284 400 297 325 320 291 C336 268 358 263 378 277 C397 291 398 317 392 345 C379 401 350 449 330 488" fill="#dfa27f" stroke="#bd7f5d" stroke-width="3"/>
+        <path d="M472 488 C477 414 507 342 548 282 C561 263 582 252 600 260 C620 270 621 297 610 320 C578 386 545 435 518 484" fill="#dfa27f" stroke="#bd7f5d" stroke-width="3"/>
+        <rect x="344" y="100" width="34" height="352" rx="17" fill="${SC&&s.c5?'#b09cff':'#dfa27f'}" stroke="${SC&&s.c5?'#6d4aff':'#bd7f5d'}" stroke-width="3"/>
+        <rect x="408" y="87" width="34" height="365" rx="17" fill="${SD&&s.d5?'#7fd0ff':'#dfa27f'}" stroke="${SD&&s.d5?'#168fdd':'#bd7f5d'}" stroke-width="3"/>
+        <rect x="472" y="104" width="34" height="348" rx="17" fill="${SU&&s.u5?'#ffae9d':'#dfa27f'}" stroke="${SU&&s.u5?'#f35f42':'#bd7f5d'}" stroke-width="3"/>
+      </g>
+
+      ${SC&&s.cb?`<path d="M602 220 C659 213 702 225 726 247 C742 261 737 286 717 291 C688 299 650 281 597 258" fill="#a78eff" stroke="#6d51f5" stroke-width="3"/><circle cx="${cx}" cy="160" r="13" fill="#8a68ff" stroke="#fff" stroke-width="4"/><text x="${cx}" y="164" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">${s.cb}</text>`:''}
+      ${SD&&s.db?`<path d="M318 292 C268 278 224 285 199 307 C184 321 188 343 207 352 C234 366 277 351 324 331" fill="#6fc7ff" stroke="#158ddd" stroke-width="3"/><circle cx="${dx}" cy="276" r="13" fill="#2da4ff" stroke="#fff" stroke-width="4"/><text x="${dx}" y="280" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">${s.db}</text>`:''}
+      ${SU&&s.ub?`${(xr||back)?`<path d="M268 426 C245 404 243 385 258 370 C279 352 308 357 ${ux-26} 392" fill="none" stroke="#ff765b" stroke-width="18" stroke-linecap="round"/>`:`<path d="M268 426 C245 404 243 385 258 370 C279 352 308 357 ${ux-26} 392" fill="none" stroke="#ff765b" stroke-width="15" stroke-linecap="round" opacity=".2" stroke-dasharray="12 8"/>`}<circle cx="${ux}" cy="392" r="13" fill="#ff765b" stroke="#fff" stroke-width="4"/><text x="${ux}" y="396" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">${s.ub}</text>`:''}
+
+      ${SC&&s.c5?`<circle cx="359" cy="84" r="12" fill="#8a68ff"/><text x="378" y="89" font-size="14" font-weight="900" fill="#8a68ff">+500</text>`:''}
+      ${SD&&s.d5?`<circle cx="425" cy="72" r="12" fill="#2da4ff"/><text x="444" y="77" font-size="14" font-weight="900" fill="#2da4ff">+50</text>`:''}
+      ${SU&&s.u5?`<circle cx="489" cy="90" r="12" fill="#ff765b"/><text x="508" y="95" font-size="14" font-weight="900" fill="#ff765b">+5</text>`:''}
+
+      <text x="70" y="160" font-size="14" font-weight="900" fill="#8a68ff">CENTENA</text>
+      <text x="80" y="276" font-size="14" font-weight="900" fill="#2da4ff">DEZENA</text>
+      <text x="77" y="392" font-size="14" font-weight="900" fill="#ff765b">UNIDADE</text>
+      <rect x="55" y="530" width="750" height="48" rx="15" fill="#fff" stroke="#e2e6f3"/>
+      <text x="80" y="560" font-size="14" fill="#17203f">C = ${SC&&s.c5?500:0} + ${SC?s.cb*100:0} • D = ${SD&&s.d5?50:0} + ${SD?s.db*10:0} • U = ${SU&&s.u5?5:0} + ${SU?s.ub:0}</text>
+    </svg>`;
+  }
+
+  function render(n){
+    const s=enc(n??$('num').value); $('num').value=s.n; $('out').textContent=String(s.n).padStart(3,'0');
+    $('ct').textContent=`${s.c5?500:0} + ${s.cb*100} = ${s.c*100}`;
+    $('dt').textContent=`${s.d5?50:0} + ${s.db*10} = ${s.d*10}`;
+    $('ut').textContent=`${s.u5?5:0} + ${s.ub} = ${s.u}`;
+    $('formula').textContent=`${String(s.n).padStart(3,'0')} = (${s.c5?500:0}+${s.cb*100}) + (${s.d5?50:0}+${s.db*10}) + (${s.u5?5:0}+${s.ub})`;
+    $('handbox').innerHTML=hand(s,3);
+  }
+
+  document.getElementById('minus').onclick=()=>render(enc($('num').value).n-1);
+  document.getElementById('plus').onclick=()=>render(enc($('num').value).n+1);
+  document.getElementById('random').onclick=()=>render(Math.floor(Math.random()*1000));
+  document.getElementById('num').oninput=()=>render();
+  document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-view]').forEach(x=>x.classList.remove('active'));b.classList.add('active');view=b.dataset.view;render();});
+  document.getElementById('animate').onclick=()=>{if(anim)return;anim=true;const s=enc($('num').value);let step=0;const tick=()=>{$('handbox').innerHTML=hand(s,step);step++;if(step<=3)setTimeout(tick,420);else anim=false};tick();};
+  document.getElementById('newtarget').onclick=()=>{target=Math.floor(Math.random()*1000);$('target').textContent=String(target).padStart(3,'0');$('fb').textContent='';};
+  document.getElementById('check').onclick=()=>{const v=(+$('cb').value+($('c5').checked?5:0))*100+(+$('db').value+($('d5').checked?5:0))*10+(+$('ub').value+($('u5').checked?5:0));$('fb').textContent=v===target?'✅ Correto!':`❌ Você montou ${v}`;$('fb').style.color=v===target?'#178b63':'#c84b4b';};
+
+  render(532);
 })();
 </script>
-<script src="app.js?v=3.2.0"></script>
 </body>
 </html>
