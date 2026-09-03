@@ -1,9 +1,9 @@
 {
-  "name": "FuriniMath v2",
+  "name": "FuriniMath v3",
   "short_name": "FuriniMath",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f4f6ff",
-  "theme_color": "#25145f",
+  "background_color": "#f5f6ff",
+  "theme_color": "#221a5c",
   "icons": []
 }

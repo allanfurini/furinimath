@@ -1,140 +1,133 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#25145f">
-<title>FuriniMath v2</title>
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#221a5c" />
+  <title>FuriniMath v3</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header class="top">
-  <div class="brand"><div class="mark">🧠✋</div><div><b>FuriniMath</b><small>Método Furini • Soroban Mental</small></div></div>
-  <nav><button data-go="trilha">Aprender</button><button class="active" data-go="visualizador">Visualizador</button><button data-go="atlas">Atlas real</button><button data-go="treino">Treino</button></nav>
-  <div class="xp">🔥 <span id="xp">0</span> XP</div>
-</header>
-
-<main>
-<section class="hero">
-  <div>
-    <span class="eyebrow">VERSÃO 2 • CORRIGIDA PELAS FOTOS REAIS</span>
-    <h1>As mãos ficam <em>sobrepostas</em>.</h1>
-    <p>Esta versão abandona a mão genérica desenhada. O atlas usa suas fotografias como fonte anatômica do Método Furini e monta cada número com estados independentes de unidades, dezenas, centenas e quinários.</p>
-  </div>
-  <div class="hero-badge">0–999<br><small>mesma lógica operacional do soroban</small></div>
-</section>
-
-<section id="visualizador" class="panel">
-  <div class="panel-head">
-    <div><span class="eyebrow">COMPOSITOR</span><h2>Monte qualquer número</h2></div>
-    <div class="number-control"><button id="minus">−</button><input id="number" inputmode="numeric" value="532" maxlength="3"><button id="plus">+</button><button class="random" id="random">Aleatório</button></div>
-  </div>
-
-  <div class="composer">
-    <div class="board">
-      <div class="viewtabs">
-        <button class="view active" data-view="frente">Frente</button>
-        <button class="view" data-view="verso">Verso</button>
-        <button class="view" data-view="raiox">Raio‑X didático</button>
-      </div>
-      <div class="big-number" id="bigNumber">532</div>
-
-      <div class="piece-stack" id="pieceStack"></div>
-
-      <div class="kinesthetic-note">
-        <b>Por que mais de uma vista?</b>
-        O mindinho esquerdo trabalha atrás da mão direita. Na prática ele é percebido cinestesicamente; no software, a posição precisa aparecer como uma camada explícita.
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">✋</div>
+      <div>
+        <strong>FuriniMath</strong>
+        <small>Método Furini • mãos virtuais didáticas</small>
       </div>
     </div>
+    <nav>
+      <button data-go="visualizador">Visualizador</button>
+      <button data-go="trilha">Trilha</button>
+      <button data-go="treino">Treino</button>
+    </nav>
+    <div class="pill">⭐ <span id="xp">0</span> XP</div>
+  </header>
 
-    <aside class="decomp">
-      <h3>Decomposição</h3>
-      <div class="dec c"><span>C</span><div><b id="cText"></b><small>centenas</small></div></div>
-      <div class="dec d"><span>D</span><div><b id="dText"></b><small>dezenas</small></div></div>
-      <div class="dec u"><span>U</span><div><b id="uText"></b><small>unidades</small></div></div>
-      <div class="total">Total <strong id="totalText">532</strong></div>
-      <div class="rule">
-        <b>Regra Furini</b>
-        <p>Base 0–4 + quinário da ordem. As operações seguem complementos, transporte e empréstimo do soroban.</p>
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">VERSÃO 3</span>
+        <h1>Agora com <span>mãos virtuais</span> e visualização correta.</h1>
+        <p>As fotos serviram como referência. A arte final é virtual, mais bonita e mais didática. O verso não fica invertido como na foto; o modo <b>Raio‑X</b> mostra logicamente o dedo oculto atrás da mão direita.</p>
       </div>
-    </aside>
-  </div>
-</section>
+      <div class="heroCard">
+        <div class="heroN">000–999</div>
+        <p>Mesma lógica operacional do soroban: base 0–4 + quinário da ordem.</p>
+      </div>
+    </section>
 
-<section id="atlas" class="panel">
-  <div class="panel-head"><div><span class="eyebrow">ATLAS FOTOGRÁFICO</span><h2>Posições confirmadas</h2></div></div>
-  <p class="intro">Estas imagens são derivadas diretamente das fotos que você enviou. Elas são a fonte de verdade anatômica da plataforma.</p>
+    <section id="visualizador" class="panel">
+      <div class="panelHead">
+        <div>
+          <span class="eyebrow">VISUALIZADOR FURINI</span>
+          <h2>Monte qualquer número</h2>
+        </div>
+        <div class="controlsTop">
+          <button id="minus">−</button>
+          <input id="num" value="532" inputmode="numeric" maxlength="3" />
+          <button id="plus">+</button>
+          <button id="rand" class="alt">Aleatório</button>
+        </div>
+      </div>
 
-  <h3 class="sub">Unidades — mindinho esquerdo por trás</h3>
-  <div class="atlas-grid five">
-    <figure><img src="assets/atlas/u0.png"><figcaption>0</figcaption></figure>
-    <figure><img src="assets/atlas/u1.png"><figcaption>1</figcaption></figure>
-    <figure><img src="assets/atlas/u2.png"><figcaption>2</figcaption></figure>
-    <figure><img src="assets/atlas/u3.png"><figcaption>3</figcaption></figure>
-    <figure><img src="assets/atlas/u4.png"><figcaption>4</figcaption></figure>
-  </div>
+      <div class="visualGrid">
+        <div class="stageCard">
+          <div class="stageTop">
+            <div class="tabs">
+              <button class="tab active" data-view="frente">Frente</button>
+              <button class="tab" data-view="verso">Verso</button>
+              <button class="tab" data-view="raiox">Raio‑X</button>
+            </div>
+            <button id="animate" class="alt">Animar formação</button>
+          </div>
+          <div id="svgWrap" class="svgWrap"></div>
+          <div class="note">O mindinho da mão esquerda marca as unidades por trás da mão direita. Por isso o modo <b>Raio‑X</b> torna visível aquilo que, no uso real, é percebido de forma cinestésica.</div>
+        </div>
 
-  <h3 class="sub">Dezenas — polegar direito</h3>
-  <div class="atlas-grid four">
-    <figure><img src="assets/atlas/d1.png"><figcaption>10</figcaption></figure>
-    <figure><img src="assets/atlas/d2.png"><figcaption>20</figcaption></figure>
-    <figure><img src="assets/atlas/d3.png"><figcaption>30</figcaption></figure>
-    <figure><img src="assets/atlas/d4.png"><figcaption>40</figcaption></figure>
-  </div>
+        <aside class="infoCard">
+          <div class="bigResult"><span>Número</span><strong id="outN">532</strong></div>
+          <div class="legendItem c"><b>Centenas</b><span id="cDesc"></span></div>
+          <div class="legendItem d"><b>Dezenas</b><span id="dDesc"></span></div>
+          <div class="legendItem u"><b>Unidades</b><span id="uDesc"></span></div>
+          <div class="formula" id="formula"></div>
+          <div class="guideBox">
+            <b>Lógica</b>
+            <ul>
+              <li><span class="dot c"></span> Polegar esquerdo = 100–400 / Indicador esquerdo = +500</li>
+              <li><span class="dot d"></span> Polegar direito = 10–40 / Médio esquerdo = +50</li>
+              <li><span class="dot u"></span> Mindinho esquerdo atrás = 1–4 / Anelar esquerdo = +5</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-  <h3 class="sub">Centenas — polegar esquerdo</h3>
-  <div class="atlas-grid four">
-    <figure><img src="assets/atlas/c1.png"><figcaption>100</figcaption></figure>
-    <figure><img src="assets/atlas/c2.png"><figcaption>200</figcaption></figure>
-    <figure><img src="assets/atlas/c3.png"><figcaption>300</figcaption></figure>
-    <figure><img src="assets/atlas/c4.png"><figcaption>400</figcaption></figure>
-  </div>
+    <section class="panel" id="trilha">
+      <div class="panelHead">
+        <div>
+          <span class="eyebrow">TRILHA</span>
+          <h2>Aprenda gradualmente</h2>
+        </div>
+      </div>
+      <div id="path" class="path"></div>
+    </section>
 
-  <h3 class="sub">Quinários</h3>
-  <div class="quinario">
-    <img src="assets/reference/quinarios_558.png">
-    <div>
-      <div class="q q500"><b>Indicador esquerdo</b><span>+500</span></div>
-      <div class="q q50"><b>Médio esquerdo</b><span>+50</span></div>
-      <div class="q q5"><b>Anelar esquerdo</b><span>+5</span></div>
-      <p>Quando o dedo quinário aparece, soma 5 na ordem correspondente. Quando não aparece, soma 0.</p>
-    </div>
-  </div>
+    <section class="panel" id="treino">
+      <div class="panelHead">
+        <div>
+          <span class="eyebrow">TREINO</span>
+          <h2>Monte o estado Furini</h2>
+        </div>
+      </div>
+      <div class="trainGrid">
+        <div class="challengeBox">
+          <small>NÚMERO ALVO</small>
+          <strong id="target">482</strong>
+          <button id="newTarget">Novo número</button>
+        </div>
+        <div class="selectors">
+          <label>Base centena
+            <select id="cb"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          </label>
+          <label>+500 <input type="checkbox" id="c5"></label>
+          <label>Base dezena
+            <select id="db"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          </label>
+          <label>+50 <input type="checkbox" id="d5"></label>
+          <label>Base unidade
+            <select id="ub"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+          </label>
+          <label>+5 <input type="checkbox" id="u5"></label>
+          <button id="check" class="primary">Conferir</button>
+          <div id="feedback" class="feedback"></div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <h3 class="sub">Exemplos reais já confirmados</h3>
-  <div class="atlas-grid five examples">
-    <figure><img src="assets/examples/558.png"><figcaption>558</figcaption></figure>
-    <figure><img src="assets/examples/875.png"><figcaption>875</figcaption></figure>
-    <figure><img src="assets/examples/825.png"><figcaption>825</figcaption></figure>
-    <figure><img src="assets/examples/695.png"><figcaption>695</figcaption></figure>
-    <figure><img src="assets/examples/375.png"><figcaption>375</figcaption></figure>
-  </div>
-</section>
-
-<section id="trilha" class="panel">
-  <div class="panel-head"><div><span class="eyebrow">TRILHA</span><h2>Do dedo ao cálculo rápido</h2></div></div>
-  <div class="path" id="path"></div>
-</section>
-
-<section id="treino" class="panel">
-  <div class="panel-head"><div><span class="eyebrow">TREINO RÁPIDO</span><h2>Leia o estado Furini</h2></div></div>
-  <div class="training">
-    <div class="challenge"><small>NÚMERO ALVO</small><strong id="target">375</strong><button id="newTarget">Novo</button></div>
-    <div class="selectors">
-      <label>Centena base<select id="cb"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
-      <label>+500 <input type="checkbox" id="c5"></label>
-      <label>Dezena base<select id="db"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
-      <label>+50 <input type="checkbox" id="d5"></label>
-      <label>Unidade base<select id="ub"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
-      <label>+5 <input type="checkbox" id="u5"></label>
-      <button class="check" id="check">Conferir</button><b id="feedback"></b>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer>FuriniMath v2 • Método Furini • documentação e protótipo interativo</footer>
-<script src="app.js"></script>
+  <footer>FuriniMath v3 • Método Furini • visual virtual didático</footer>
+  <script src="app.js"></script>
 </body>
 </html>

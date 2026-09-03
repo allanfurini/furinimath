@@ -1,25 +1,18 @@
-# FuriniMath v2
+# FuriniMath v3
 
-Versão corrigida a partir das fotografias reais do Método Furini.
+Versão com mão virtual didática.
 
-## O que mudou
-- Removida a mão SVG genérica que distorcia a lógica.
-- As duas mãos são tratadas como sobrepostas.
-- Atlas fotográfico real de:
-  - unidades 0–4;
-  - dezenas 10–40;
-  - centenas 100–400;
-  - quinários +5, +50, +500;
-  - exemplos confirmados 558, 875, 825, 695 e 375.
-- O compositor trabalha com peças/estados independentes, evitando criar 999 modelos.
-- Frente, verso e Raio-X são modos didáticos.
-- Operações são descritas como a mesma lógica do soroban.
+## Melhorias desta versão
+- removidas as fotos reais do produto final;
+- arte final com mãos virtuais sobrepostas;
+- vista frontal, posterior e raio-x corrigidas;
+- dedo oculto das unidades exibido logicamente;
+- animação de formação do número;
+- trilha, treino e visualizador mantidos.
 
-## Atualização no GitHub
-Coloque `furinimath-v2.zip` na raiz do repositório e execute:
+## Atualizar no GitHub
+Coloque `furinimath-v3.zip` na raiz do repositório e execute:
 
 ```bash
-unzip -o furinimath-v2.zip && bash atualizar.sh
+unzip -o furinimath-v3.zip && bash atualizar.sh
 ```
-
-O GitHub Actions já configurado no projeto deverá publicar a versão após o push.
