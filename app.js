@@ -111,7 +111,9 @@ function handSvg(s, showStep=3){
       <circle cx="${cenBaseX}" cy="160" r="13" fill="#8967ff" stroke="#fff" stroke-width="4" /><text x="${cenBaseX}" y="164" font-size="11" text-anchor="middle" font-weight="900" fill="#fff">${s.cb}</text>` : ''}
 
     <!-- hidden pinky / unit base -->
-    ${showU && s.ub ? (xr || back ? `<path d="M262 428 C236 404,236 383,255 365 C283 338,315 352,${unitBaseX-28} 392" fill="none" stroke="#ff7b61" stroke-width="18" stroke-linecap="round" opacity=".95" />` : `<path d="M265 422 C242 399,240 382,255 368 C275 350,306 354,${unitBaseX-26} 392" fill="none" stroke="#ff7b61" stroke-width="15" stroke-linecap="round" opacity=".18" stroke-dasharray="12 8" />`)}
+    ${showU && s.ub ? `${(xr || back)
+      ? `<path d="M262 428 C236 404,236 383,255 365 C283 338,315 352,${unitBaseX-28} 392" fill="none" stroke="#ff7b61" stroke-width="18" stroke-linecap="round" opacity=".95" />`
+      : `<path d="M265 422 C242 399,240 382,255 368 C275 350,306 354,${unitBaseX-26} 392" fill="none" stroke="#ff7b61" stroke-width="15" stroke-linecap="round" opacity=".18" stroke-dasharray="12 8" />`}
       <circle cx="${unitBaseX}" cy="392" r="13" fill="#ff7b61" stroke="#fff" stroke-width="4" />
       <text x="${unitBaseX}" y="396" font-size="11" text-anchor="middle" font-weight="900" fill="#fff">${s.ub}</text>` : ''}
 
@@ -188,4 +190,4 @@ $('#minus').onclick=()=>render(enc($('#num').value).n-1); $('#plus').onclick=()=
 $('#xp').textContent = state.xp; renderPath(); render(); newTarget();
 
 
-console.log('FuriniMath v3.1 carregado - mão virtual');
+console.log('FuriniMath v3.2 carregado - mão virtual corrigida');
