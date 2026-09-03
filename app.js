@@ -186,4 +186,6 @@ document.querySelectorAll('[data-go]').forEach(btn=>btn.onclick=()=>document.get
 document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>{ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); view = btn.dataset.view; render(); });
 $('#minus').onclick=()=>render(enc($('#num').value).n-1); $('#plus').onclick=()=>render(enc($('#num').value).n+1); $('#rand').onclick=()=>render(Math.floor(Math.random()*1000)); $('#num').oninput=()=>render(); $('#animate').onclick=animateBuild; $('#newTarget').onclick=newTarget; $('#check').onclick=checkTarget;
 $('#xp').textContent = state.xp; renderPath(); render(); newTarget();
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+
+console.log('FuriniMath v3.1 carregado - mão virtual');

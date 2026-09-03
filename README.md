@@ -1,4 +1,4 @@
-# FuriniMath v3
+# FuriniMath v3.1
 
 Versão com mão virtual didática.
 
@@ -11,8 +11,11 @@ Versão com mão virtual didática.
 - trilha, treino e visualizador mantidos.
 
 ## Atualizar no GitHub
-Coloque `furinimath-v3.zip` na raiz do repositório e execute:
+Coloque `furinimath-v3.1.zip` na raiz do repositório e execute:
 
 ```bash
-unzip -o furinimath-v3.zip && bash atualizar.sh
+unzip -o furinimath-v3.1.zip && bash atualizar.sh
 ```
+
+
+Esta versão remove caches/service workers antigos para impedir que a v2 continue aparecendo.
