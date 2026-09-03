@@ -1,22 +1,25 @@
-# FuriniMath v1.0
-Protótipo web/PWA da plataforma **Matemática nas Mãos**.
+# FuriniMath v2
 
-## Incluído
-- Trilha progressiva com 10 módulos.
-- Chisanbop, binário, soroban e Método Furini.
-- Laboratório Furini 0–999.
-- Visualização frontal, traseira e raio-X.
-- Decomposição automática do estado Furini.
-- Desafio interativo.
-- XP, progresso e persistência local.
-- Estrutura inicial para soma, subtração, multiplicação e divisão usando a lógica do soroban.
+Versão corrigida a partir das fotografias reais do Método Furini.
 
-## Atualizar pelo GitHub
-Envie `furinimath-v1.zip` para a raiz do repositório e rode:
+## O que mudou
+- Removida a mão SVG genérica que distorcia a lógica.
+- As duas mãos são tratadas como sobrepostas.
+- Atlas fotográfico real de:
+  - unidades 0–4;
+  - dezenas 10–40;
+  - centenas 100–400;
+  - quinários +5, +50, +500;
+  - exemplos confirmados 558, 875, 825, 695 e 375.
+- O compositor trabalha com peças/estados independentes, evitando criar 999 modelos.
+- Frente, verso e Raio-X são modos didáticos.
+- Operações são descritas como a mesma lógica do soroban.
+
+## Atualização no GitHub
+Coloque `furinimath-v2.zip` na raiz do repositório e execute:
 
 ```bash
-unzip -o furinimath-v1.zip && bash deploy.sh
+unzip -o furinimath-v2.zip && bash atualizar.sh
 ```
 
-## GitHub Pages
-Settings > Pages > Deploy from a branch > `main` / root.
+O GitHub Actions já configurado no projeto deverá publicar a versão após o push.

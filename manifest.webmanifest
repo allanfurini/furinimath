@@ -1,1 +1,9 @@
-{"name":"FuriniMath — Matemática nas Mãos","short_name":"FuriniMath","start_url":"./","display":"standalone","background_color":"#f7f5ff","theme_color":"#6d4aff","icons":[]}
+{
+  "name": "FuriniMath v2",
+  "short_name": "FuriniMath",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6ff",
+  "theme_color": "#25145f",
+  "icons": []
+}

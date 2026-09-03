@@ -1,8 +1,66 @@
-const modules=[{icon:"👋",title:"Descobrindo as mãos",desc:"Direita, esquerda, dedos, falanges e valor posicional.",lesson:"hands"},{icon:"🔢",title:"Contagem & Chisanbop",desc:"Representações até 99 e complementos.",lesson:"chisanbop"},{icon:"💻",title:"Binário nas mãos",desc:"Use os dedos como bits e represente até 1023.",lesson:"binary"},{icon:"🧮",title:"Soroban",desc:"Base 1–4, conta de 5 e amigos do 5 e do 10.",lesson:"soroban"},{icon:"✋",title:"Método Furini",desc:"Transforme as mãos em três hastes: U, D e C.",lesson:"furini"},{icon:"➕",title:"Soma",desc:"Movimentos diretos e complementares.",lesson:"sum"},{icon:"➖",title:"Subtração",desc:"Retirada, complementos e empréstimos.",lesson:"sub"},{icon:"✖️",title:"Multiplicação",desc:"Estratégias do soroban aplicadas ao método.",lesson:"mul"},{icon:"➗",title:"Divisão",desc:"Divisão com raciocínio posicional.",lesson:"div"},{icon:"⚡",title:"Velocidade",desc:"Treino cronometrado e automatização.",lesson:"speed"}];
-const lessons={hands:{title:"Descobrindo as mãos",steps:["Identifique mão direita e mão esquerda.","Observe as falanges da mão direita: elas funcionam como referências espaciais.","No Método Furini, uma posição pode significar 1, 10 ou 100 dependendo da ordem."]},chisanbop:{title:"Chisanbop",steps:["Uma mão representa unidades e a outra dezenas.","Quatro dedos valem 1 cada e o polegar vale 5.","Automatize os complementos de 5 e 10 em vez de contar dedo por dedo."]},binary:{title:"Binário nas mãos",steps:["Cada dedo é um bit: ligado ou desligado.","Atribua potências de 2: 1, 2, 4, 8, ... 512.","Com dez dedos, é possível representar de 0 a 1023."]},soroban:{title:"Soroban",steps:["Cada haste representa uma ordem decimal.","As quatro contas inferiores representam 1–4 e a conta superior vale 5.","As operações usam movimentos diretos, complementos de 5 e complementos de 10."]},furini:{title:"Método Furini",steps:["Unidades: mindinho esquerdo atrás marca 0–4; anelar esquerdo acrescenta 5.","Dezenas: polegar direito marca 10–40; médio esquerdo acrescenta 50.","Centenas: polegar esquerdo marca 100–400; indicador esquerdo acrescenta 500.","Frente e verso são mostrados no software porque o uso real contém informação cinestésica."]},sum:{title:"Soma — lógica de soroban",steps:["Represente o primeiro número.","Adicione cada ordem usando movimento direto quando possível.","Se faltar espaço, use complemento de 5 ou 10 e faça o transporte para a ordem seguinte."]},sub:{title:"Subtração — lógica de soroban",steps:["Represente o minuendo.","Retire diretamente quando houver marcadores disponíveis.","Quando não houver, aplique o complemento inverso e faça empréstimo da ordem seguinte."]},mul:{title:"Multiplicação",steps:["Comece com multiplicações por um dígito.","Use decomposição posicional e acumule os resultados como no soroban.","Avance para multiplicadores de dois dígitos."]},div:{title:"Divisão",steps:["Trabalhe da maior ordem para a menor.","Estime o quociente parcial, subtraia o produto e prossiga.","Use as mãos como registradores das três ordens quando o resultado couber em 0–999."]},speed:{title:"Velocidade",steps:["A precisão vem antes da velocidade.","Faça séries curtas com 95% ou mais de acerto.","Reduza gradualmente o tempo de exposição e automatize os movimentos."]}};
-let state=JSON.parse(localStorage.getItem("furinimath")||'{"xp":0,"completed":[]}'),currentView="front";
-function save(){localStorage.setItem("furinimath",JSON.stringify(state));renderProgress()}function renderPath(){const p=document.querySelector("#path");p.innerHTML=modules.map((m,i)=>`<article class="path-card ${state.completed.includes(m.lesson)?"completed":""}"><div class="num">${m.icon}</div><h3>${i+1}. ${m.title}</h3><p>${m.desc}</p><button data-lesson="${m.lesson}">${state.completed.includes(m.lesson)?"Revisar ✓":"Abrir aula"}</button></article>`).join("");p.querySelectorAll("[data-lesson]").forEach(b=>b.onclick=()=>openLesson(b.dataset.lesson))}function renderProgress(){document.querySelector("#xp").textContent=state.xp;const p=Math.round(state.completed.length/modules.length*100);document.querySelector("#progressFill").style.width=p+"%";document.querySelector("#progressText").textContent=p+"%";renderPath()}function openLesson(id){const l=lessons[id],d=document.querySelector("#lessonDialog"),c=document.querySelector("#lessonContent");c.innerHTML=`<span class="eyebrow">AULA</span><h2>${l.title}</h2>${l.steps.map((s,i)=>`<div class="lesson-step"><b>${i+1}.</b> ${s}</div>`).join("")}<div class="lesson-question"><b>Meta:</b> compreenda o princípio antes de buscar velocidade.</div><button class="primary" id="finishLesson" style="margin-top:18px">Concluir aula</button>`;d.showModal();document.querySelector("#finishLesson").onclick=()=>{if(!state.completed.includes(id)){state.completed.push(id);state.xp+=50;save()}d.close()}}document.querySelector("#closeLesson").onclick=()=>document.querySelector("#lessonDialog").close();
-function encode(n){n=Math.max(0,Math.min(999,parseInt(n)||0));const u=n%10,d=Math.floor(n/10)%10,c=Math.floor(n/100)%10;return{n,u,d,c,uBase:u%5,u5:u>=5,dBase:d%5,d5:d>=5,cBase:c%5,c5:c>=5}}
-function handSVG(s,view){const xr=view==="xray"?"xray":"",back=view==="back",title=back?"VISTA TRASEIRA":view==="xray"?"VISTA RAIO-X":"VISTA FRONTAL",hiddenClass=view==="front"?"hiddenFinger":"baseMark",unitY=[395,350,305,260,215][s.uBase],tenY=[320,285,250,215,180][s.dBase],centY=[320,285,250,215,180][s.cBase];return `<svg class="hand-svg ${xr}" viewBox="0 0 700 500"><rect x="10" y="10" width="680" height="480" rx="30" fill="#fbfaff"/><text x="32" y="48" font-size="16" font-weight="900" fill="#6d4aff">${title}</text><text x="560" y="55" font-size="40" font-weight="1000" fill="#262235">${String(s.n).padStart(3,"0")}</text><rect x="250" y="120" width="280" height="300" rx="80" fill="#efd0ba" stroke="#d8b49c" stroke-width="3"/><rect x="265" y="65" width="52" height="260" rx="26" fill="#efd0ba" class="finger"/><rect x="325" y="50" width="52" height="275" rx="26" fill="#efd0ba" class="finger"/><rect x="385" y="58" width="52" height="267" rx="26" fill="#efd0ba" class="finger"/><rect x="445" y="83" width="52" height="242" rx="26" fill="#efd0ba" class="finger"/>${[170,245,320].map(y=>`<line x1="258" y1="${y}" x2="505" y2="${y}" stroke="#b98f76" stroke-width="2" opacity=".7"/>`).join("")}<text x="515" y="175" font-size="12" fill="#6f6a82">centena</text><text x="515" y="250" font-size="12" fill="#6f6a82">dezena</text><text x="515" y="325" font-size="12" fill="#6f6a82">unidade</text>${s.dBase>0?`<path d="M 245 ${tenY} Q 155 ${tenY-18} 118 ${tenY+35}" fill="none" stroke="#53b7ff" stroke-width="34" stroke-linecap="round"/><text x="75" y="${tenY+10}" font-size="16" font-weight="900" fill="#278ccb">${s.dBase*10}</text>`:""}${s.cBase>0?`<path d="M 505 ${centY} Q 600 ${centY-15} 635 ${centY+25}" fill="none" stroke="#9b70ff" stroke-width="34" stroke-linecap="round"/><text x="610" y="${centY-20}" font-size="16" font-weight="900" fill="#6d4aff">${s.cBase*100}</text>`:""}${s.uBase>0?`<path d="M 240 405 Q 190 ${unitY} 310 ${unitY}" fill="none" stroke="#ff8f70" stroke-width="24" stroke-linecap="round" class="${hiddenClass}"/><text x="185" y="${unitY-16}" font-size="16" font-weight="900" fill="#d96648">${s.uBase}</text>`:""}${s.c5?`<path d="M 315 410 L 315 105" stroke="#9b70ff" stroke-width="28" stroke-linecap="round"/><text x="295" y="92" font-size="15" font-weight="900" fill="#6d4aff">500</text>`:""}${s.d5?`<path d="M 370 410 L 370 125" stroke="#53b7ff" stroke-width="28" stroke-linecap="round"/><text x="352" y="112" font-size="15" font-weight="900" fill="#278ccb">50</text>`:""}${s.u5?`<path d="M 425 410 L 425 150" stroke="#ff8f70" stroke-width="28" stroke-linecap="round"/><text x="417" y="137" font-size="15" font-weight="900" fill="#d96648">5</text>`:""}<rect x="40" y="425" width="620" height="44" rx="15" fill="#fff" stroke="#e8e3f6"/><text x="60" y="453" font-size="14" fill="#262235">C: ${s.c5?500:0}+${s.cBase*100}  •  D: ${s.d5?50:0}+${s.dBase*10}  •  U: ${s.u5?5:0}+${s.uBase}</text></svg>`}
-function showFurini(){const s=encode(document.querySelector("#furiniNumber").value);document.querySelector("#furiniNumber").value=s.n;document.querySelector("#decomposition").innerHTML=`<b>${s.n}</b> = <span style="color:#c7b5ff">${s.c*100}</span> + <span style="color:#7bd0ff">${s.d*10}</span> + <span style="color:#ffaf98">${s.u}</span><br><small>(${s.c5?500:0}+${s.cBase*100}) + (${s.d5?50:0}+${s.dBase*10}) + (${s.u5?5:0}+${s.uBase})</small>`;document.querySelector("#handView").innerHTML=handSVG(s,currentView)}document.querySelector("#showNumber").onclick=showFurini;document.querySelector("#furiniNumber").addEventListener("keydown",e=>{if(e.key==="Enter")showFurini()});document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");currentView=t.dataset.view;showFurini()});
-let target=482;function newChallenge(){target=Math.floor(Math.random()*1000);document.querySelector("#challengeNumber").textContent=String(target).padStart(3,"0");document.querySelector("#feedback").textContent=""}function controlsValue(){return(Number(cBase.value)+(c5.checked?5:0))*100+(Number(dBase.value)+(d5.checked?5:0))*10+(Number(uBase.value)+(u5.checked?5:0))}["cBase","dBase","uBase"].forEach(id=>{const el=document.getElementById(id),out=document.getElementById(id+"Out");el.oninput=()=>out.textContent=el.value});document.querySelector("#checkAnswer").onclick=()=>{const v=controlsValue(),f=document.querySelector("#feedback");if(v===target){f.textContent="✅ Perfeito! +10 XP";f.style.color="#14895f";state.xp+=10;save()}else{f.textContent=`❌ Você montou ${v}. Tente novamente.`;f.style.color="#c94a4a"}};document.querySelector("#newChallenge").onclick=newChallenge;document.querySelectorAll("[data-scroll]").forEach(b=>b.onclick=()=>document.querySelector(b.dataset.scroll).scrollIntoView({behavior:"smooth"}));renderProgress();showFurini();if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+
+const modules=[
+["👋","Fundamentos","Mãos, falanges e valor posicional."],
+["🔢","Chisanbop","Representação até 99 e complementos."],
+["💻","Binário","Dedos como bits, até 1023."],
+["🧮","Soroban","Base 1–4, quinário e complementos."],
+["✋","Método Furini","Três ordens nas mãos sobrepostas."],
+["➕","Soma","Mesma lógica operacional do soroban."],
+["➖","Subtração","Complementos e empréstimos."],
+["✖️","Multiplicação","Progressão pelo método do soroban."],
+["➗","Divisão","Raciocínio posicional."],
+["⚡","Velocidade","Automatização e cálculo rápido."]
+];
+let state=JSON.parse(localStorage.getItem("fm2")||'{"xp":0,"done":[]}');
+let view="frente", target=375;
+const $=s=>document.querySelector(s);
+
+function enc(n){
+ n=Math.max(0,Math.min(999,parseInt(n)||0));
+ const u=n%10,d=Math.floor(n/10)%10,c=Math.floor(n/100)%10;
+ return {n,u,d,c,ub:u%5,u5:u>=5,db:d%5,d5:d>=5,cb:c%5,c5:c>=5}
+}
+function imgFor(kind,base){
+ if(base===0) return "assets/atlas/u0.png";
+ return `assets/atlas/${kind}${base}.png`;
+}
+function piece(cls,title,img,q){
+ return `<div class="piece ${cls} ${view}">
+   ${q?`<div class="active-q">${q}</div>`:""}
+   <img src="${img}" alt="${title}">
+   <div class="cap"><span>${title}</span><span class="tag">${cls.toUpperCase()}</span></div>
+ </div>`;
+}
+function render(){
+ let s=enc($("#number").value); $("#number").value=s.n; $("#bigNumber").textContent=s.n; $("#totalText").textContent=s.n;
+ $("#cText").textContent=`${s.c5?500:0} + ${s.cb*100} = ${s.c*100}`;
+ $("#dText").textContent=`${s.d5?50:0} + ${s.db*10} = ${s.d*10}`;
+ $("#uText").textContent=`${s.u5?5:0} + ${s.ub} = ${s.u}`;
+ let cimg=imgFor("c",s.cb), dimg=imgFor("d",s.db), uimg=imgFor("u",s.ub);
+ $("#pieceStack").innerHTML=
+   piece("c",`Centenas: ${s.c*100}`,cimg,s.c5?"+500 • indicador esquerdo":"")+
+   piece("d",`Dezenas: ${s.d*10}`,dimg,s.d5?"+50 • médio esquerdo":"")+
+   piece("u",`Unidades: ${s.u}`,uimg,s.u5?"+5 • anelar esquerdo":"");
+}
+$("#minus").onclick=()=>{$("#number").value=Math.max(0,enc($("#number").value).n-1);render()}
+$("#plus").onclick=()=>{$("#number").value=Math.min(999,enc($("#number").value).n+1);render()}
+$("#random").onclick=()=>{$("#number").value=Math.floor(Math.random()*1000);render()}
+$("#number").oninput=render;
+document.querySelectorAll(".view").forEach(b=>b.onclick=()=>{document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));b.classList.add("active");view=b.dataset.view;render()});
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:"smooth"}));
+
+function path(){
+ $("#path").innerHTML=modules.map((m,i)=>`<article class="lesson ${state.done.includes(i)?"done":""}">
+ <div style="font-size:28px">${m[0]}</div><b>${i+1}. ${m[1]}</b><small>${m[2]}</small>
+ <button data-i="${i}">${state.done.includes(i)?"Concluído ✓":"Marcar concluído"}</button></article>`).join("");
+ document.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{let i=+b.dataset.i;if(!state.done.includes(i)){state.done.push(i);state.xp+=50;localStorage.setItem("fm2",JSON.stringify(state));$("#xp").textContent=state.xp;path()}})
+}
+function newTarget(){target=Math.floor(Math.random()*1000);$("#target").textContent=String(target).padStart(3,"0");$("#feedback").textContent=""}
+$("#newTarget").onclick=newTarget;
+$("#check").onclick=()=>{
+ let v=(+$("#cb").value+($("#c5").checked?5:0))*100+(+$("#db").value+($("#d5").checked?5:0))*10+(+$("#ub").value+($("#u5").checked?5:0));
+ if(v===target){$("#feedback").textContent="✅ Correto! +10 XP";$("#feedback").style.color="#168d62";state.xp+=10;localStorage.setItem("fm2",JSON.stringify(state));$("#xp").textContent=state.xp}
+ else{$("#feedback").textContent=`❌ Você montou ${v}`;$("#feedback").style.color="#c94747"}
+}
+$("#xp").textContent=state.xp;path();render();newTarget();
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
